@@ -1,0 +1,16 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    url: jdbc:mysql://210.211.125.205/kbvaamfl_mymusic_db
+    username: kbvaamfl_TrungHieu
+    password: Doanhieu@1
+  jpa:
+    hibernate:
+
+    show-sql: true
+
+logging:
+  level:
+    org.springframework.security: DEBUG
