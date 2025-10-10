@@ -4,6 +4,7 @@ import com.trunghieu.MyMusicApp.DTO.Request.LoginRequest;
 import com.trunghieu.MyMusicApp.DTO.Request.User.LikeSongRequest;
 import com.trunghieu.MyMusicApp.DTO.Request.User.UserCreationRequest;
 import com.trunghieu.MyMusicApp.DTO.Response.LikedSongResponse;
+import com.trunghieu.MyMusicApp.DTO.Response.LoginResponse;
 import com.trunghieu.MyMusicApp.DTO.Response.SongResponse;
 import com.trunghieu.MyMusicApp.DTO.Response.UserResponse;
 import com.trunghieu.MyMusicApp.Entity.Song;
@@ -31,5 +32,7 @@ public interface UserMapper {
 
     @Mapping(source = "song.id", target = "id")
     public List<LikedSongResponse> toLikedSongResponse(List<Song> song);
+
+    public LoginResponse toLoginRequest(LoginRequest request);
 }
 

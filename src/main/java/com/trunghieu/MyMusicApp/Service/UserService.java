@@ -1,12 +1,10 @@
 package com.trunghieu.MyMusicApp.Service;
 
+import com.trunghieu.MyMusicApp.DTO.Request.LoginRequest;
 import com.trunghieu.MyMusicApp.DTO.Request.User.LikeSongRequest;
 import com.trunghieu.MyMusicApp.DTO.Request.User.UserCreationRequest;
 import com.trunghieu.MyMusicApp.DTO.Request.User.UserUpdateRequest;
-import com.trunghieu.MyMusicApp.DTO.Response.ApiResponse;
-import com.trunghieu.MyMusicApp.DTO.Response.LikedSongResponse;
-import com.trunghieu.MyMusicApp.DTO.Response.SongResponse;
-import com.trunghieu.MyMusicApp.DTO.Response.UserResponse;
+import com.trunghieu.MyMusicApp.DTO.Response.*;
 import com.trunghieu.MyMusicApp.Entity.Song;
 import com.trunghieu.MyMusicApp.Entity.User;
 import com.trunghieu.MyMusicApp.Mapper.UserMapper;
@@ -25,6 +23,12 @@ import java.util.List;
 public class UserService {
     UserRepository repository;
     UserMapper userMapper;
+
+    public ApiResponse<LoginResponse> login(LoginRequest request){
+        User user = repository.findByUsername(request.getUsername()).orElseThrow(() -> new RuntimeException("Không có người dùng"));
+        LoginResponse loginResponse = new LoginResponse(user.getId(), user.getUsername(), user.getPassword(), user.getRole());
+        return new ApiResponse<>(200, "Đăng nhập thành công", loginResponse);
+    }
 
     public ApiResponse<UserResponse> addUser(UserCreationRequest request){
         User user = userMapper.toUser(request);

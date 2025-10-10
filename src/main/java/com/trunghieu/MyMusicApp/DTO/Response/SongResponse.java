@@ -22,7 +22,7 @@ public class SongResponse {
 
     int duration;
 
-    String file_url;;
+    String file_url;
 
     Date created_at;
 

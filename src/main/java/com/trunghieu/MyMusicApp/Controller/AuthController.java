@@ -2,8 +2,10 @@ package com.trunghieu.MyMusicApp.Controller;
 
 import com.trunghieu.MyMusicApp.DTO.Request.LoginRequest;
 import com.trunghieu.MyMusicApp.DTO.Response.ApiResponse;
+import com.trunghieu.MyMusicApp.DTO.Response.LoginResponse;
 import com.trunghieu.MyMusicApp.DTO.Response.UserResponse;
 import com.trunghieu.MyMusicApp.Mapper.UserMapper;
+import com.trunghieu.MyMusicApp.Service.UserService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -25,18 +27,21 @@ import org.springframework.web.bind.annotation.RestController;
 public class AuthController {
     AuthenticationManager authenticationManager;
     UserMapper mapper;
+    UserService service;
     @PostMapping("/login")
-    ResponseEntity<ApiResponse<UserResponse>> login(@RequestBody LoginRequest request){
+    ResponseEntity<ApiResponse<LoginResponse>> login(@RequestBody LoginRequest request){
         try{
             // Kiểm tra xem username và password có chính xác hay không ?
             Authentication authentication = authenticationManager.authenticate(new
                     UsernamePasswordAuthenticationToken(request.getUsername(),request.getPassword())
             );
 
+
             //Khi xác nhận là chính xác thì lưu thông tin đăng nhập vào SecurityContextHolder: username, password, role
             SecurityContextHolder.getContext().setAuthentication(authentication);
 
-            return ResponseEntity.ok(new ApiResponse<>(200, "Đăng nhập thành công", mapper.toUserResponseFromLoginRequest(request)));
+            ApiResponse apiResponse = service.login(request);
+            return ResponseEntity.ok(apiResponse);
 
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new ApiResponse<>(404, "Thông tin đăng nhập sai", null));

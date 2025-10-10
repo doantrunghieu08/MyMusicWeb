@@ -21,25 +21,25 @@ import java.util.List;
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class ArtistController {
     ArtistService service;
-    @GetMapping("/findSongByArtist/{id}")
+    @GetMapping("/user/findSongByArtist/{id}")
     public ResponseEntity<ApiResponse<List<SongResponse>>> filterSongByArtist(@PathVariable int id){
         ApiResponse apiResponse = service.getsongList(id);
         return ResponseEntity.ok(apiResponse);
     }
 
-    @PostMapping("/addArtist")
+    @PostMapping("/admin/addArtist")
     public ResponseEntity<ApiResponse<ArtistResponse>> addArtist(@RequestBody ArtistCreationRequest request){
         ApiResponse apiResponse = service.addArtist(request);
         return ResponseEntity.ok(apiResponse);
     }
 
-    @DeleteMapping("/delArtist/{id}")
+    @DeleteMapping("/admin/delArtist/{id}")
     public ResponseEntity<ApiResponse<ArtistResponse>> delArtist(@PathVariable int id){
         ApiResponse response = service.delArtist(id);
         return ResponseEntity.ok(response);
     }
 
-    @PutMapping("/updateArtist/{id}")
+    @PutMapping("/admin/updateArtist/{id}")
     public ResponseEntity<ApiResponse<ArtistResponse>> updateArtist(@PathVariable int id, @RequestBody ArtistUpdataionRequest request){
         ApiResponse apiResponse = service.updateArtist(id, request);
         return  ResponseEntity.ok(apiResponse);
@@ -51,9 +51,15 @@ public class ArtistController {
         return ResponseEntity.ok(apiResponse);
     }
 
-    @GetMapping("/searchArtist/{keyword}")
+    @GetMapping("/user/searchArtist/{keyword}")
     public ResponseEntity<ApiResponse<List<ArtistResponse>>> searchSong(@PathVariable String keyword){
         ApiResponse apiResponse = service.searchArtist(keyword);
+        return ResponseEntity.ok(apiResponse);
+    }
+
+    @GetMapping("/findArtist/{artistID}")
+    public ResponseEntity<ApiResponse<ArtistResponse>> findArtistByID(@PathVariable int artistID){
+        ApiResponse apiResponse = service.findArtist(artistID);
         return ResponseEntity.ok(apiResponse);
     }
 }

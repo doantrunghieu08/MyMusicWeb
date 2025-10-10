@@ -26,31 +26,31 @@ public class SongController {
         return ResponseEntity.ok(apiResponse);
     }
 
-    @PostMapping("/addSong")
+    @PostMapping("/user/addSong")
     public ResponseEntity<ApiResponse<SongResponse>> addSong(@RequestBody SongAdditationRequest request){
         ApiResponse apiResponse = service.addMusic(request);
         return ResponseEntity.ok(apiResponse);
     }
 
-    @DeleteMapping("/deleteSong/{id}")
+    @DeleteMapping("/user/deleteSong/{id}")
     public ResponseEntity<ApiResponse<SongResponse>> deleteSong(@PathVariable int id){
         ApiResponse apiResponse = service.deleteSong(id);
         return ResponseEntity.ok(apiResponse);
     }
 
-    @PutMapping("/updateSong/{id}")
+    @PutMapping("/user/updateSong/{id}")
     public ResponseEntity<ApiResponse<SongResponse>> updateSong(@PathVariable int id, @RequestBody SongUpdationRequest request){
         ApiResponse apiResponse = service.updateSong(id, request);
         return ResponseEntity.ok(apiResponse);
     }
 
-    @GetMapping("searchSong/{id}")
+    @GetMapping("/searchSong/{id}")
     public ResponseEntity<ApiResponse<SongResponse>> findSong(@PathVariable int id){
         ApiResponse apiResponse = service.searchSongByID(id);
         return ResponseEntity.ok(apiResponse);
     }
 
-    @GetMapping("/searchSong/{keyword}")
+    @GetMapping("/searchSongByKeyword/{keyword}")
     public ResponseEntity<ApiResponse<List<SongResponse>>> searchSong(@PathVariable String keyword){
         ApiResponse apiResponse = service.searchSong(keyword);
         return ResponseEntity.ok(apiResponse);

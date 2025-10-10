@@ -22,4 +22,5 @@ public interface SongMappper {
     @Mapping(source = "genre.name", target = "genreName")
     public SongResponse toSongResponseFromSong(Song song);
 
+
 }

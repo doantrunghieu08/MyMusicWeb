@@ -39,9 +39,10 @@ public class GenreService {
         return new ApiResponse<>(200, "Xóa thể loại thành công", mapper.toGenreResponse(genre));
     }
 
-    public ApiResponse<GenreResponse> getSongByGenre(int id){
+    public ApiResponse<List<SongResponse>> getSongByGenre(int id){
         Genre genre = repository.findById(id).orElseThrow(() -> new RuntimeException("Không có thể loại"));
-        return new ApiResponse<>(200, "Các bài hát theo thể loại", mapper.toGenreResponse(genre));
+        List<Song> songList = genre.getSongList();
+        return new ApiResponse<>(200, "Các bài hát theo thể loại", songMappper.toSongResponseList(songList));
 
     }
 
@@ -65,5 +66,11 @@ public class GenreService {
         genre.setSongList(songList);
         repository.save(genre);
         return new ApiResponse<>(200, "Cập nhật thành công", mapper.toGenreResponse(genre));
+    }
+
+    public ApiResponse<GenreResponse> searchGenreById(int id){
+        Genre genre = repository.findById(id).orElseThrow(()-> new RuntimeException("Không có thể loại"));
+
+        return new ApiResponse<>(200,  "Thể loại", mapper.toGenreResponse(genre));
     }
 }

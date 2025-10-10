@@ -24,45 +24,43 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
     UserService service;
 
-    UserMapper mapper;
-
-    @PostMapping("/addUser")
+    @PostMapping("/admin/addUser")
     public ResponseEntity<ApiResponse<UserResponse>> addUser(@RequestBody UserCreationRequest request){
         ApiResponse apiResponse = service.addUser(request);
         return ResponseEntity.ok(apiResponse);
     }
 
-    @DeleteMapping("/deleteUser/{id}")
+    @DeleteMapping("/admin/deleteUser/{id}")
     public ResponseEntity<ApiResponse<UserResponse>> deleteUser(@PathVariable int id){
         ApiResponse apiResponse = service.deleteUser(id);
         return ResponseEntity.ok(apiResponse);
     }
 
-    @PutMapping("/updateUser/{id}")
+    @PutMapping("/user/updateUser/{id}")
     public ResponseEntity<ApiResponse<UserResponse>> updateUser(@PathVariable int id, @RequestBody UserUpdateRequest request){
         ApiResponse apiResponse = service.updateUser(id,request);
         return ResponseEntity.ok(apiResponse);
     }
 
-    @PutMapping("/likeSong/{id}")
+    @PutMapping("/user/likeSong/{id}")
     public ResponseEntity<ApiResponse<UserResponse>> likeSong(@PathVariable int id, @RequestBody LikeSongRequest request){
         ApiResponse apiResponse = service.likeSong(id, request);
         return ResponseEntity.ok(apiResponse);
     }
 
-    @PutMapping("/stopLiking/{id}")
+    @PutMapping("/user/stopLiking/{id}")
     public ResponseEntity<ApiResponse<UserResponse>> stopLiking(@PathVariable int id, @RequestBody LikeSongRequest request){
         ApiResponse apiResponse = service.stopLiking(id, request);
         return ResponseEntity.ok(apiResponse);
     }
 
-    @GetMapping("/getUserList")
+    @GetMapping("/admin/getUserList")
     public ResponseEntity<ApiResponse<UserResponse>> getUserList(){
         ApiResponse apiResponse = service.getUserList();
         return ResponseEntity.ok(apiResponse);
     }
 
-    @GetMapping("getLikedSong/{id}")
+    @GetMapping("/user/getLikedSong/{id}")
     public ResponseEntity<ApiResponse<LikedSongResponse>> getLikedSong(@PathVariable int id){
         ApiResponse apiResponse = service.getLikedSongList(id);
         return ResponseEntity.ok(apiResponse);

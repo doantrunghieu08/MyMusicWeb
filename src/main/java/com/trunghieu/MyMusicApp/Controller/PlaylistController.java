@@ -23,39 +23,39 @@ import java.util.List;
 public class PlaylistController {
     PlaylistService service;
 
-    @PostMapping("/createPlaylist")
+    @PostMapping("/user/createPlaylist")
     public ResponseEntity<ApiResponse<PlaylistResponse>> createPlaylist(@RequestBody PlaylistCreationRequest request){
         ApiResponse apiResponse = service.addPlayList(request);
         return ResponseEntity.ok(apiResponse);
     }
 
-    @PostMapping("/addSong/{id}")
+    @PostMapping("/user/addSong/{id}")
     public ResponseEntity<ApiResponse<PlaylistResponse>> addSongToPlaylist(@PathVariable int id, @RequestBody AddSongToPlaylistRequest request){
         ApiResponse apiResponse = service.addSongToPlaylist(request, id);
         return ResponseEntity.ok(apiResponse);
     }
-    @PostMapping("/deleteSong/{id}")
+    @PostMapping("/user/deleteSong/{id}")
     public ResponseEntity<ApiResponse<PlaylistResponse>> deleteSongFromPlaylist(@PathVariable int id, @RequestBody DeleteSongFromPlaylistRequest request){
         ApiResponse apiResponse = service.deleteSongFromPlaylist(id, request);
         return ResponseEntity.ok(apiResponse);
     }
-    @DeleteMapping("/deletePlaylist/{id}")
+    @DeleteMapping("/user/deletePlaylist/{id}")
     public ResponseEntity<ApiResponse<PlaylistResponse>> deletePlaylist(@PathVariable int id){
         ApiResponse apiResponse = service.deletePlaylist(id);
         return ResponseEntity.ok(apiResponse);
     }
 
-    @PutMapping("/editPlaylist/{id}")
+    @PutMapping("/user/editPlaylist/{id}")
     public ResponseEntity<ApiResponse<PlaylistResponse>> editPlayList(@PathVariable int id, @RequestBody UpdatePlaylistRequest request){
         ApiResponse apiResponse = service.updatePlaylist(id, request);
         return ResponseEntity.ok(apiResponse);
     }
-    @GetMapping("/getPlaylistByUserId/{user_id}")
+    @GetMapping("/user/getPlaylistByUserId/{user_id}")
     public ResponseEntity<ApiResponse<PlaylistResponse>> getPlaylistByUserID(@PathVariable int user_id){
         ApiResponse apiResponse = service.getPlaylistList(user_id);
         return ResponseEntity.ok(apiResponse);
     }
-    @PutMapping("/updatePlaylist/{id}")
+    @PutMapping("/user/updatePlaylist/{id}")
     public ResponseEntity<ApiResponse<PlaylistResponse>> updatePlaylist(@PathVariable int id, @RequestBody UpdatePlaylistRequest request){
         ApiResponse apiResponse = service.updatePlaylist(id, request);
         return ResponseEntity.ok(apiResponse);

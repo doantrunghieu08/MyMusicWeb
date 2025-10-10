@@ -74,4 +74,9 @@ public class ArtistService {
         }
         return new ApiResponse<>(404, "Không có ca sĩ", null);
     }
+
+    public ApiResponse<ArtistResponse> findArtist(int id){
+        Artist artist = repository.findById(id).orElseThrow(() -> new RuntimeException("Không có tác giả cần tìm"));
+        return new ApiResponse<>(200, "Ca sĩ đã tìm ", artistMapper.toResponse(artist));
+    }
 }

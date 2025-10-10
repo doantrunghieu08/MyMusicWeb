@@ -1,31 +1,21 @@
 package com.trunghieu.MyMusicApp.DTO.Response;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.trunghieu.MyMusicApp.Entity.Song;
-import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
 
-import java.util.List;
-
 @Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @JsonInclude(JsonInclude.Include.NON_NULL)
-
 @NoArgsConstructor
-public class GenreResponse {
-
-    int id;
-
-    String name;
-
-    String description;
-
-    List<SongResponse> songs;
-
+@AllArgsConstructor
+public class LoginResponse {
+    int userID;
+    String username;
+    String password;
+    String role;
 }
