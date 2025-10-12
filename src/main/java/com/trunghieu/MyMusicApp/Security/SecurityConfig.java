@@ -79,6 +79,7 @@ public class SecurityConfig {
                                 "/Music/**",
                                 "/findArtist/**",
                                 "/searchSongByKeyword/**",
+                                "/getArtistList",
                                 "/Image/**").permitAll()
                         .anyRequest().authenticated()
                 )
