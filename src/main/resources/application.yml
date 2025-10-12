@@ -8,12 +8,15 @@ spring:
     password: Doanhieu@1
   jpa:
     hibernate:
-      ddl-auto: update
-    show-sql: true
+      ddl-auto: none  # tắt auto update schema để khởi động nhanh hơn
+    show-sql: false   # tắt log query khi deploy cho đỡ nặng
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.MySQLDialect
+        dialect: org.hibernate.dialect.MySQL8Dialect
+        format_sql: false
+        jdbc.lob.non_contextual_creation: true
+        temp.use_jdbc_metadata_defaults: false  # tăng tốc start-up, bỏ metadata check
 
 logging:
   level:
-    org.springframework.security: DEBUG
+    root: INFO
